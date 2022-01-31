@@ -7,7 +7,7 @@ pangan <- read_html(url)
 data <- html_table(pangan)
 data <- data[[1]]
 
-data_semula <- read.csv('data/pangan.csv', check.names = FALSE)
+data_semula <- read.csv('https://raw.githubusercontent.com/Nr5D/panganBot/main/data/data.csv', check.names = FALSE)
 data_sedot <- data # From rvest
 
 d1 <- strptime(colnames(data_sedot)[ncol(data_sedot)], "%d/%m/%Y")
@@ -34,7 +34,7 @@ pangan_token <- rtweet::create_token(
 )
 
 # Read Data from previously harvested data
-data <- read.csv('data/pangan.csv', check.names = FALSE)
+data <- read.csv('https://raw.githubusercontent.com/Nr5D/panganBot/main/data/data.csv', check.names = FALSE)
 baris <- c(1:nrow(data))
 terpilih <- sample(baris, 1)
 
