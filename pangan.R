@@ -50,10 +50,13 @@ colnames(data_plot)[2] <- data[terpilih,2]
 
 # Most basic Line and Point Plot
 p <- ggplot(data_plot, aes(x =day,  y=data_plot[,2])) +
-  geom_line()+
-  geom_point()+
+  geom_line(color = "#00AFBB", size = 1)+
+  geom_point(color = "#FC4E07", size = 2)+
   xlab(colnames(data_plot)[2])+
-  ylab("Harga")
+  ylab("Harga")+
+  scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
+  theme_minimal()
+p
 
 # Download the image to a temporary location
 # save to a temp file
