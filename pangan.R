@@ -54,9 +54,8 @@ p <- ggplot(data_plot, aes(x =day,  y=data_plot[,2])) +
   geom_point(color = "#FC4E07", size = 2)+
   xlab(colnames(data_plot)[2])+
   ylab("Harga")+
-  scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
-  theme_minimal()
-p
+  scale_y_continuous(labels = function(x) paste0("Rp", formatC(x, format="d", big.mark=".", decimal.mark=","),",-" )) +
+  theme_light()
 
 # Download the image to a temporary location
 # save to a temp file
