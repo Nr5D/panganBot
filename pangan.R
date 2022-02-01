@@ -31,11 +31,22 @@ price_before <- formatC(price_before*1000, format="d", big.mark=".", decimal.mar
 
 name <- data[terpilih,2]
 
+
+posisi <- function(x){
+  if ((data[x,ncol(data)]-data[x,ncol(data)-1])  > 0) {
+    print("naik")
+  } else if ((data[x,ncol(data)]-data[x,ncol(data)-1])  < 0) {
+    print("turun")
+  } else {
+    print("tetap")
+  }
+}
+
 # Build the status message (text and URL)
 status_details <- paste0(
   colnames(data)[ncol(data)],": Harga ", name,
   " di Pasar Tradisional adalah Rp",price,
-  ",- dengan harga sebelumnya adalah Rp", price_before,",-"
+  ",- ",  posisi(terpilih)," dari harga sebelumnya Rp", price_before,",-"
 )
 
 # Image sample
