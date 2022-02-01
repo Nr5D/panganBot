@@ -1,4 +1,4 @@
-name: panganBOTpublish
+name: panganBOTharvest
 
 on:
   schedule:
