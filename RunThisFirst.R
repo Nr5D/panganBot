@@ -83,3 +83,6 @@ data = rapi
 
 #Upload data
 dbWriteTable(conn = con, name = "pangan", value = data, append = T, row.names = F)
+
+# Disconnect from DB
+on.exit(dbDisconnect(con))  
