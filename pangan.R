@@ -1,4 +1,4 @@
-# Read Data from Elephant SQL
+# Read Data from ElephantSQL
 library(RPostgreSQL)
 
 drv <- dbDriver("PostgreSQL")
@@ -26,14 +26,25 @@ dataSiap <- data %>%
   filter(commodity == data$commodity[terpilih]) %>%
   mutate(price = formatC(as.numeric(price)*1000, format="d", big.mark=".", decimal.mark=","))
 
+# Hashtag
+hashtag <- c("pangan","hargaPangan","hargapPnganIndonesia","hargaHarian","pasarTradisional","pasarModern","pedagangBesar","produsen",
+             "github","rvest","rtweet", "ElephantSQL", "SQL", "bot", "opensource", "ggplot2","PostgreSQL","RPostgreSQL")
+
+samp_word <- sample(hashtag, 1)
+
+paste0("#",samp_word)
+
 # Build the status message (text and price)
 status_details <- paste0(
   dataSiap$date[1],": Harga ", dataSiap$commodity[1],
   " di :", "\n","\n",
-  "⛺ ",dataSiap$type[1], " adalah Rp",dataSiap$price[1],",-", "\n",
-  "🏪 ",dataSiap$type[2], " adalah Rp",dataSiap$price[2],",-", "\n",
-  "🎪 ",dataSiap$type[3], " adalah Rp",dataSiap$price[3],",-", "\n",
-  "👨🏻‍🌾 ",dataSiap$type[4], " adalah Rp",dataSiap$price[4],",-", "\n")
+  "⛺ ",dataSiap$type[1], " : Rp",dataSiap$price[1],",-", "\n",
+  "🏪 ",dataSiap$type[2], " : Rp",dataSiap$price[2],",-", "\n",
+  "🎪 ",dataSiap$type[3], " : Rp",dataSiap$price[3],",-", "\n",
+  "👨🏻‍🌾 ",dataSiap$type[4], " : Rp",dataSiap$price[4],",-", "\n",
+  "\n",
+  "\n",
+  "#",samp_word)
 
 
 # Create Time Series Plot
