@@ -35,9 +35,36 @@ status_details <- paste0(
   "🎪 ",dataSiap$type[3], " adalah Rp",dataSiap$price[3],",-", "\n",
   "👨🏻‍🌾 ",dataSiap$type[4], " adalah Rp",dataSiap$price[4],",-", "\n")
 
+
+# Create Time Series Plot
+## Data Preparation
+dataPlot <- df %>%
+  group_by(date) %>%
+  filter(commodity == data$commodity[terpilih]) %>%
+  mutate(date = as.Date(date, "%d/%m/%Y")) %>%
+  mutate(price = as.numeric(price)*1000) %>%
+  na.omit()
+
+## ggplot2
+library(ggplot2)
+p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
+  geom_line(size = 1)+
+  geom_point(size = 2)+
+  xlab(dataPlot$commodity[1])+
+  ylab("Harga")+
+  scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
+  theme_light()
+
+# Download the image to a temporary location
+# save to a temp file
+file <- tempfile( fileext = ".png")
+ggsave(file, plot = p, device = "png", dpi = 144, width = 8, height = 8, units = "in" )
+
+                     
+# Publish to Twitter
 library(rtweet)
 
-# Create Twitter token
+## Create Twitter token
 pangan_token <- rtweet::create_token(
   app = "PanganBOT",
   consumer_key =    Sys.getenv("TWITTER_CONSUMER_API_KEY"),
@@ -46,9 +73,10 @@ pangan_token <- rtweet::create_token(
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 )
 
-# Post the image to Twitter
+## Post the image to Twitter
 rtweet::post_tweet(
   status = status_details,
+  media = file,
   token = pangan_token
 )
 
