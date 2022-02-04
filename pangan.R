@@ -51,3 +51,5 @@ rtweet::post_tweet(
   status = status_details,
   token = pangan_token
 )
+
+on.exit(dbDisconnect(con))
