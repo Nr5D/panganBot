@@ -27,7 +27,7 @@ dataSiap <- data %>%
   mutate(price = formatC(as.numeric(price)*1000, format="d", big.mark=".", decimal.mark=","))
 
 # Hashtag
-hashtag <- c("pangan","hargaPangan","hargapPnganIndonesia","hargaHarian","pasarTradisional","pasarModern","pedagangBesar","produsen",
+hashtag <- c("pangan","hargaPangan","hargaPanganIndonesia","hargaHarian","pasarTradisional","pasarModern","pedagangBesar","produsen",
              "github","rvest","rtweet", "ElephantSQL", "SQL", "bot", "opensource", "ggplot2","PostgreSQL","RPostgreSQL")
 
 samp_word <- sample(hashtag, 1)
@@ -59,8 +59,8 @@ dataPlot <- df %>%
 ## ggplot2
 library(ggplot2)
 p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
-  geom_line(size = 1)+
-  geom_point(size = 2)+
+  geom_line(size = 3)+
+  geom_point(size = 6)+
   xlab(dataPlot$commodity[1])+
   ylab("Harga")+
   scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
