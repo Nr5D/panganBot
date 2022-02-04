@@ -12,7 +12,8 @@ con <- dbConnect(drv,
 
 df <- dbGetQuery(con, statement = paste("SELECT * FROM Pangan"))
 
-# Looking for the Latest Data to Make Status Message
+# Status Message
+## Looking for the Latest Data to Make Status Message
 
 library(dplyr)
 data <- df %>% 
@@ -22,11 +23,10 @@ baris <- c(1:nrow(data))
 terpilih <- sample(baris, 1)
 
 dataSiap <- data %>%
-  filter(commodity == data$commodity[terpilih])
+  filter(commodity == data$commodity[terpilih]) %>%
+  mutate(price = formatC(as.numeric(price)*1000, format="d", big.mark=".", decimal.mark=","))
 
-dataSiap$price <- formatC(as.numeric(dataSiap$price)*1000, format="d", big.mark=".", decimal.mark=",")
-
-# Build the status message (text and URL)
+# Build the status message (text and price)
 status_details <- paste0(
   dataSiap$date[1],": Harga ", dataSiap$commodity[1],
   " di :", "\n","\n",
