@@ -1,21 +1,85 @@
 library(rvest)
 
-url <- "https://hargapangan.id/tabel-harga/pasar-tradisional/daerah"
-# getting the html codes
-pangan <- read_html(url)
+# URL from hargapangan.ID
+# Pasar Tradisional (PT) : https://hargapangan.id/tabel-harga/pasar-tradisional/daerah
+# Pasar Modern (PM) : https://hargapangan.id/tabel-harga/pasar-modern/daerah
+# Pedagang Besar (PB) : https://hargapangan.id/tabel-harga/pedagang-besar/daerah
+# Produsen (PD) : https://hargapangan.id/tabel-harga/produsen/daerah
 
-data <- html_table(pangan)
-data <- data[[1]]
+# Latest Price Data from Traditional Market
 
-data_semula <- read.csv('https://raw.githubusercontent.com/Nr5D/panganBot/main/data/data.csv', check.names = FALSE)
-data_sedot <- data # From rvest
+urlPT <- "https://hargapangan.id/tabel-harga/pasar-tradisional/daerah"
+tabelPT <- read_html(urlPT)
+dataPT <- html_table(tabelPT)
+dataPT <- dataPT[[1]][,c(1,2,8)] #7 nanti di ganti ncol(dataXX)
 
-d1 <- strptime(colnames(data_sedot)[ncol(data_sedot)], "%d/%m/%Y")
-d2 <- strptime(colnames(data_semula)[ncol(data_semula)], "%d/%m/%Y")
+# Data from Modern Market
 
-if (!dir.exists('data')) {dir.create('data')}
+urlPM <- "https://hargapangan.id/tabel-harga/pasar-modern/daerah"
+tabelPM <- read_html(urlPM)
+dataPM <- html_table(tabelPM)
+dataPM <- dataPM[[1]][,c(1,2,8)]
 
-if (! d1==d2) { #bikin double if di sini, jika tanggal beda dan jika datanya beda
-  data_akhir <- cbind.data.frame(data_semula, data_sedot[,length(data_sedot)])
-  write.csv( data_akhir, file.path("data/pangan.csv"), row.names = FALSE )
+# Data from Wholesaler
+
+urlPB <- "https://hargapangan.id/tabel-harga/pedagang-besar/daerah"
+tabelPB <- read_html(urlPB)
+dataPB <- html_table(tabelPB)
+dataPB <- dataPB[[1]][,c(1,2,8)]
+
+# Data from Producer
+
+urlPD <- "https://hargapangan.id/tabel-harga/produsen/daerah"
+tabelPD <- read_html(urlPD)
+dataPD <- html_table(tabelPD)
+dataPD <- dataPD[[1]][,c(1,2,8)]
+
+# Make it Tidy
+# Traditional Market
+rapiPT <- gather(dataPT, "date","price", -'Komoditas (Rp)', -'No.')
+rapiPT$type <- rep("Pasar Tradisional", nrow(rapiPT))
+
+# Modern Market
+rapiPM <- gather(dataPM, "date","price", -'Komoditas (Rp)', -'No.')
+rapiPM$type <- rep("Pasar Modern", nrow(rapiPM))
+
+# Wholesaler
+rapiPB <- gather(dataPB, "date","price", -'Komoditas (Rp)', -'No.')
+rapiPB$type <- rep("Pedagang Besar", nrow(rapiPB))
+
+# Producer
+rapiPD <- gather(dataPD, "date","price", -'Komoditas (Rp)', -'No.')
+rapiPD$type <- rep("Produsen", nrow(rapiPD))
+
+# Read Data from Elephant SQL
+library(RPostgreSQL)
+
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv,
+                 dbname = Sys.getenv("ELEPHANT_SQL_DBNAME"), 
+                 host = Sys.getenv("ELEPHANT_SQL_HOST"),
+                 port = 5432,
+                 user = Sys.getenv("ELEPHANT_SQL_USER"),
+                 password = Sys.getenv("ELEPHANT_SQL_PASSWORD")
+)
+
+df <- dbGetQuery(con, statement = paste("SELECT * FROM Pangan"))
+
+
+# Bind Them All
+rapi <-rbind(rapiPT, rapiPM, rapiPB, rapiPD)
+colnames(rapi) <- c("no", "commodity", "date", "price","type")
+rapi$no <- (nrow(df)+1):(nrow(df)+nrow(rapi))
+
+# Upload Data
+
+## To compare date, from previously saved data in database (d1), and date from fresh harvested data using rvest (d2)
+d1 <- strptime(df$date[nrow(df)], "%d/%m/%Y")
+d2 <- strptime(rapi$date[nrow(rapi)], "%d/%m/%Y")
+
+## If d1 and d2 different, this script will send the fresh harvested data to Elephant SQL
+if (! d1==d2) {
+  dbWriteTable(conn = con, name = "pangan", value = rapi, append = T, row.names = F)
 }
+
+on.exit(dbDisconnect(con))      
