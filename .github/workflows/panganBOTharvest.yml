@@ -19,5 +19,7 @@ jobs:
         run: Rscript -e 'install.packages("rvest", dependencies = TRUE)'
       - name: Install RPostgreSQL package
         run: Rscript -e 'install.packages("RPostgreSQL", dependencies = TRUE)'
+      - name: Install tidyr package
+        run: Rscript -e 'install.packages("tidyr", dependencies = TRUE)'
       - name: Scrapping Data from HargaPangan.ID
         run: Rscript panganHarvest.R
