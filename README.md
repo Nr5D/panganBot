@@ -13,4 +13,4 @@ Source for the Twitter bot [@panganBot](https://www.twitter.com/panganBot). It p
 
 # hargapangan.id
 
-hargapangan.id publish daily price data six days only, by storing the result of harvesting, We have a longer periode of time series data.
+hargapangan.id publish daily price data six days only, by storing the result of harvesting, We will have a longer periode of time series data.
