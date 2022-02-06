@@ -32,6 +32,9 @@ dataPD <- html_table(tabelPD)
 dataPD <- dataPD[[1]]
 
 # Make it Tidy
+
+library(tidyr)
+
 # Traditional Market
 rapiPT <- gather(dataPT, "date","price", -'Komoditas (Rp)', -'No.')
 rapiPT$type <- rep("Pasar Tradisional", nrow(rapiPT))
