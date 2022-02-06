@@ -11,7 +11,7 @@ library(rvest)
 urlPT <- "https://hargapangan.id/tabel-harga/pasar-tradisional/daerah"
 tabelPT <- read_html(urlPT)
 dataPT <- html_table(tabelPT)
-dataPT <- dataPT[[1]][,c(1,2,8)] #7 nanti di ganti ncol(dataXX)
+dataPT <- dataPT[[1]][,c(1,2,8)]
 
 # Data from Modern Market
 
