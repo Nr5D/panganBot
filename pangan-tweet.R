@@ -105,13 +105,27 @@ dataPlot <- df %>%
 
 ## ggplot2
 library(ggplot2)
+theme_set(theme_light(base_size = 15))
 p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
-  geom_line(size = 3)+
-  geom_point(size = 6)+
+  geom_line(size = 1)+
+  geom_point(size = 3)+
   xlab(dataPlot$commodity[1])+
   ylab("Harga")+
   scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
-  theme_light()
+  theme(legend.title=element_blank(),
+        axis.title.x = element_text(color="forestgreen", vjust=-0.35),
+        axis.title.y = element_text(color="forestgreen" , vjust=0.35),
+        legend.key=element_rect(fill='lightblue'),
+        legend.background = element_rect(fill = 'lightblue'),
+        panel.background = element_rect(fill = 'grey95'),
+        plot.background = element_rect(fill = 'lightblue'),
+        axis.text.x=element_text(angle=0, hjust=1, size = 8),
+        axis.text.y=element_text(size = 10))+
+  labs(tag = paste0("@panganBot")) +
+  theme(plot.tag.position = c(0.85, 0.98),
+        plot.tag = element_text(color="forestgreen"),
+        text=element_text(family="mono"))+
+  scale_x_date(date_labels = "%d-%b")
 
 # Download the image to a temporary location
 # save to a temp file
