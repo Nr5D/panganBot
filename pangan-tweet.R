@@ -85,10 +85,10 @@ paste0("#",samp_word)
 status_details <- paste0(
   dataSiap$date[1],": Harga ", dataSiap$commodity[1],
   " di :", "\n","\n",
-  if(!is.na(dataSiap$type[1])) {paste0("⛺ ",dataSiap$type[1], " : Rp",dataSiap$price[1],",-")},"\"",
-  if (!is.na(dataSiap$type[2])) {paste0("🏪 ",dataSiap$type[2], " : Rp",dataSiap$price[2],",-")}, "\n",
-  if (!is.na(dataSiap$type[3])) {paste0("🎪 ",dataSiap$type[3], " : Rp",dataSiap$price[3],",-")}, "\n",
-  if (!is.na(dataSiap$type[4])) {paste0("👨🏻‍🌾 ", dataSiap$type[4], " : Rp",dataSiap$price[4],",-")}, "\n",
+  if(!is.na(dataSiap$type[1])) {paste0("⛺ ",dataSiap$type[1], " : Rp",dataSiap$price[1],",-")},"\n",
+  if(!is.na(dataSiap$type[2])) {paste0("🏪 ",dataSiap$type[2], " : Rp",dataSiap$price[2],",-")}, "\n",
+  if(!is.na(dataSiap$type[3])) {paste0("🎪 ",dataSiap$type[3], " : Rp",dataSiap$price[3],",-")}, "\n",
+  if(!is.na(dataSiap$type[4])) {paste0("👨🏻‍🌾 ", dataSiap$type[4], " : Rp",dataSiap$price[4],",-")}, "\n",
   "\n",
   "\n",
   "#",samp_word)
