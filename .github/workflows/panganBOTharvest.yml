@@ -2,7 +2,7 @@ name: panganBOTharvest
 
 on:
   schedule:
-    - cron: '0,15,30,45 6,7 * * 1,2,3,4,5'  # Run every 15 minutes past 6th,7th hour (UTC) on Mon-Fri
+    - cron: '0 0 1 1 *'  # Run at 00.00 UTC at 1st Jan
 
 jobs:
   pangan-post:
