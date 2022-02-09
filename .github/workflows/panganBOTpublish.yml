@@ -21,11 +21,13 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install rtweet package
         run: Rscript -e 'install.packages("rtweet", dependencies = TRUE)'
+      - name: Install rvest package
+        run: Rscript -e 'install.packages("rvest", dependencies = TRUE)'
       - name: Install ggplot2 package
         run: Rscript -e 'install.packages("ggplot2", dependencies = TRUE)'
       - name: Install dplyr package
         run: Rscript -e 'install.packages("dplyr", dependencies = TRUE)'
-      - name: Install RPostgreSQL package
-        run: Rscript -e 'install.packages("RPostgreSQL", dependencies = TRUE)'
+      - name: Install tidyr package
+        run: Rscript -e 'install.packages("tidyr", dependencies = TRUE)'
       - name: Create and post tweet
-        run: Rscript pangan.R
+        run: Rscript pangan-tweet.R
