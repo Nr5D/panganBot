@@ -113,12 +113,13 @@ p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
   ylab("Harga")+
   scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
   theme(legend.title=element_blank(),
+        legend.position="bottom",
         axis.title.x = element_text(color="forestgreen", vjust=-0.35),
         axis.title.y = element_text(color="forestgreen" , vjust=0.35),
-        legend.key=element_rect(fill='lightblue'),
-        legend.background = element_rect(fill = 'lightblue'),
+        legend.key=element_rect(fill='turquoise'),
+        legend.background = element_rect(fill = 'turquoise'),
         panel.background = element_rect(fill = 'grey95'),
-        plot.background = element_rect(fill = 'lightblue'),
+        plot.background = element_rect(fill = 'turquoise'),
         axis.text.x=element_text(angle=0, hjust=1))+
   labs(tag = paste0("@panganBot")) +
   theme(plot.tag.position = c(0.85, 0.98),
