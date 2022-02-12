@@ -74,12 +74,10 @@ dataSiap <- data %>%
   mutate(price = formatC(as.numeric(price)*1000, format="d", big.mark=".", decimal.mark=","))
 
 # Hashtag
-hashtag <- c("pangan","hargaPangan","hargaPanganIndonesia","hargaHarian","pasarTradisional","pasarModern","pedagangBesar","produsen",
-             "github","rvest","rtweet", "SQL", "bot", "opensource", "ggplot2", "dplyr", "tidyr")
+hashtag <- c("pangan","hargaPanganIndonesia","hargaHarian","pasarTradisional","pasarModern","pedagangBesar","produsen",
+             "github","rvest","rtweet", "bot", "opensource", "ggplot2", "dplyr", "tidyr")
 
 samp_word <- sample(hashtag, 1)
-
-paste0("#",samp_word)
 
 # Build the status message (text and price)
 status_details <- paste0(
@@ -91,7 +89,7 @@ status_details <- paste0(
   if(!is.na(dataSiap$type[4])) {paste0("👨🏻‍🌾 ", dataSiap$type[4], " : Rp",dataSiap$price[4],",-")}, "\n",
   "\n",
   "\n",
-  "#",samp_word)
+  "#",samp_word, " #hargaPangan #panganBot")
 
 
 # Create Time Series Plot
