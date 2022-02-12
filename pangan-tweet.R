@@ -118,7 +118,7 @@ p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
         legend.background = element_rect(fill = 'turquoise'),
         panel.background = element_rect(fill = 'grey95'),
         plot.background = element_rect(fill = 'turquoise'),
-        axis.text.x=element_text(angle=0, hjust=1))+
+        axis.text.x=element_text(angle=0, hjust=0.5))+
   labs(tag = paste0("@panganBot")) +
   theme(plot.tag.position = c(0.90, 0.985),
         plot.tag = element_text(color="forestgreen", size = 8),
