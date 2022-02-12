@@ -133,7 +133,7 @@ p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
         plot.background = element_rect(fill = 'turquoise1'),
         axis.text.x=element_text(angle=0, hjust=1))+
   labs(tag = paste0("@panganBot")) +
-  theme(plot.tag.position = c(0.85, 0.02),
+  theme(plot.tag.position = c(0.85, 0.015),
         plot.tag = element_text(color="forestgreen"),
         text=element_text(family="mono"))+
   scale_x_date(date_labels = "%d-%b")
