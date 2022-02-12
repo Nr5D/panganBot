@@ -94,7 +94,7 @@ simpleCap <- function(x) {
 # Build the status message (text and price)
 
 status_details <- paste0(
-  dataSiap$date[1],": Harga beras di Provinsi ", dataSiap$provinsi[1],
+  dataSiap$date[1],": Harga beras di Provinsi ", simpleCap(dataSiap$provinsi[1]),
   " di :", "\n","\n",
   if(!is.na(dataSiap$type[1])) {paste0("⛺ ",dataSiap$type[1], " : Rp",dataSiap$price[1],",-")},"\n",
   if(!is.na(dataSiap$type[2])) {paste0("🏪 ",dataSiap$type[2], " : Rp",dataSiap$price[2],",-")}, "\n",
