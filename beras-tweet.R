@@ -125,6 +125,7 @@ p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
   scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
   theme(legend.title=element_blank(),
         legend.position="bottom",
+        legend.text=element_text(size=12),
         axis.title.x = element_text(color="forestgreen", vjust=-0.35),
         axis.title.y = element_text(color="forestgreen" , vjust=0.35),
         legend.key=element_rect(fill='turquoise1'),
