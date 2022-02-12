@@ -112,6 +112,7 @@ p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
   scale_y_continuous(labels = function(x) paste0("Rp", x,",-" )) +
   theme(legend.title=element_blank(),
         legend.position="bottom",
+        legend.text=element_text(size=12),
         axis.title.x = element_text(color="forestgreen", vjust=-0.35),
         axis.title.y = element_text(color="forestgreen" , vjust=0.35),
         legend.key=element_rect(fill='turquoise'),
@@ -120,8 +121,8 @@ p <- ggplot(dataPlot,aes(x=date,y=price,colour=type,group=type)) +
         plot.background = element_rect(fill = 'turquoise'),
         axis.text.x=element_text(angle=0, hjust=0.5))+
   labs(tag = paste0("@panganBot")) +
-  theme(plot.tag.position = c(0.90, 0.985),
-        plot.tag = element_text(color="forestgreen", size = 8),
+  theme(plot.tag.position = c(0.90, 0.015),
+        plot.tag = element_text(color="forestgreen", size = 10),
         text=element_text(family="mono"))+
   scale_x_date(date_labels = "%d-%b")
 
