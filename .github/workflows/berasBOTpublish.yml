@@ -2,7 +2,7 @@ name: berasBOTpublish
 
 on:
   schedule:
-    - cron: '15,45 * * * *'  # once every 30 minutes
+    - cron: '15 * * * *'  # once every hour at 15th minute.
 
 jobs:
   pangan-post:
