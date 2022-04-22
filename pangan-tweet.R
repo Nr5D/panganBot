@@ -75,7 +75,7 @@ dataSiap <- data %>%
 
 # Hashtag
 hashtag <- c("pangan","hargaPanganIndonesia","hargaHarian","pasarTradisional","pasarModern","pedagangBesar","produsen",
-             "github","rvest","rtweet", "bot", "opensource", "ggplot2", "dplyr", "tidyr")
+             "github","rvest","rtweet", "bot", "opensource", "ggplot2", "dplyr", "tidyr", "hargaPangan")
 
 samp_word <- sample(hashtag, 1)
 
