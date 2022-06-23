@@ -20,7 +20,7 @@ hargapangan.id by default publish six daily price data only (through some option
 
 ![alt text](https://github.com/Nr5D/panganBot/blob/main/old/Top5.png?raw=true)
 
-Source : useR Official Account [@_useRconf](https://twitter.com/_useRconf/status/1540083512190984192)
+Source : useR!2022 Official Account [@_useRconf](https://twitter.com/_useRconf/status/1540083512190984192)
 
 ### Poster
 ![Poster](https://github.com/Nr5D/panganBot/blob/main/old/PosterPresentation-Twitter%20Bot%20using%20rvest%20rtweet%20and%20a%20GitHub%20Action.png?raw=true)
