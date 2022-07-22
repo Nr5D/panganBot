@@ -143,8 +143,8 @@ pangan_token <- rtweet::rtweet_bot(
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 )
 # Provide alt-text description
-alt_text <- paste(
-  "Sebuah Diagram Garis Harga Pangan."
+alt_text <- paste0(
+  "Harga ", dataSiap$commodity[1], ", pada tanggal ", dataSiap$date[1], " di Indonesia."
 )                     
 
 ## Post the image to Twitter
