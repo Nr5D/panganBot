@@ -149,17 +149,24 @@ ggsave(file, plot = p, device = "png", dpi = 144, width = 8, height = 8, units =
 library(rtweet)
 
 ## Create Twitter token
-pangan_token <- rtweet::create_token(
+pangan_token <- rtweet::rtweet_bot(
   app = "PanganBOT",
   consumer_key =    Sys.getenv("TWITTER_CONSUMER_API_KEY"),
   consumer_secret = Sys.getenv("TWITTER_CONSUMER_API_SECRET"),
   access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
   access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 )
+                     
+## Provide alt-text description
+alt_text <- paste0(
+  "Harga Beras di",
+  paste(gsub(" ", "", simpleCap(namaprov), fixed = TRUE))
+)
 
 ## Post the image to Twitter
 rtweet::post_tweet(
   status = status_details,
   media = file,
+  media_alt_text = alt_text,
   token = pangan_token
 )
