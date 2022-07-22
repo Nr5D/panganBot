@@ -158,8 +158,9 @@ pangan_token <- rtweet::rtweet_bot(
                      
 ## Provide alt-text description
 alt_text <- paste0(
-  "Harga Beras di",
-  paste(gsub(" ", "", simpleCap(namaprov), fixed = TRUE))
+  "Harga Beras di Provinsi ",
+  paste(gsub(" ", "", simpleCap(namaprov), fixed = TRUE)),
+  ", pada tanggal ",  dataSiap$date[1]
 )
 
 ## Post the image to Twitter
