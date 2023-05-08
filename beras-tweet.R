@@ -105,7 +105,7 @@ status_details <- paste0(
   "#",samp_word, " #beras #hargaberas #", paste(gsub(" ", "", simpleCap(namaprov), fixed = TRUE)))
 
 
-# Create Time Series Plot
+# Create Time Series Plot.
 ## Data Preparation
 dataPlot <- df %>%
   group_by(date) %>%
